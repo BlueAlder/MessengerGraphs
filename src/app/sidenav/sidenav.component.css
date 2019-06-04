@@ -1,0 +1,25 @@
+.sideNav {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: aliceblue;
+  overflow-x: hidden;
+  padding-top: 50px;
+}
+
+.body {
+  width: 80%;
+  float: right;
+}
+
+nz-select {
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+.configuration {
+  margin-top: 50px;
+}

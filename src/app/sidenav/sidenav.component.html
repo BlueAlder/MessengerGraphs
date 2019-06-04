@@ -1,0 +1,38 @@
+<div class="sideNav container">
+  <h1>Messenger Graphs</h1>
+  <div class="configuration">
+    <div class="row justify-content-center">
+      <div class="col d-flex justify-content-center">
+        <nz-select class="" [(ngModel)]="graphType">
+          <nz-option *ngFor="let graphOption of GraphTypes.values()" [nzValue]="GraphTypes[graphOption]"
+                     [nzLabel]="graphOption"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col d-flex justify-content-center">
+        <nz-select class="" [(ngModel)]="threadName" nzShowSearch>
+          <nz-option *ngFor="let threadName of threadNames" [nzValue]="threadName.name"
+                     [nzLabel]="threadName.name"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </div>
+
+
+
+     <!-- <label>Thread
+        <select [(ngModel)]="threadName">
+          <option *ngFor="let threadName of threadNames" [value]="threadName.name">{{threadName.name}}</option>
+        </select>
+      </label>-->
+
+
+</div>
+<div class="body">
+  <app-contribution [groupName]="threadName"  *ngIf="graphType == GraphTypes.Contribution"></app-contribution>
+  <app-message-rate [groupName]="threadName" *ngIf="graphType == GraphTypes.MessageRate"></app-message-rate>
+  <app-wordtree [groupName]="threadName" *ngIf="graphType == GraphTypes.WordTree"></app-wordtree>
+  <app-message-length [groupName]="threadName" *ngIf="graphType == GraphTypes.MessageLength"></app-message-length>
+</div>

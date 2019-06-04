@@ -5,18 +5,36 @@ import { GoogleChartsModule } from 'angular-google-charts';
 
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
+import { ContributionComponent } from './contribution/contribution.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { MessageRateComponent } from './message-rate/message-rate.component';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { WordtreeComponent } from './wordtree/wordtree.component';
+import { MessageLengthComponent } from './message-length/message-length.component';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContributionComponent,
+    SidenavComponent,
+    MessageRateComponent,
+    WordtreeComponent,
+    MessageLengthComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     GoogleChartsModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgZorroAntdModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
