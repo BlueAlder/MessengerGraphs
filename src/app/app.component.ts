@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {MessagesApiService, ThreadName} from './messages-api.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MessageRate, MessagesApiService, ThreadName} from './messages-api.service';
+import {GoogleChartComponent} from 'angular-google-charts';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +10,17 @@ import {MessagesApiService, ThreadName} from './messages-api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('chart')
+  chart: GoogleChartComponent;
 
   constructor(private messageApiService: MessagesApiService) {
   }
   groupList: ThreadName[];
 
+  rate = 'monthly';
+
   groupName = 'family';
-  chart = {
+  chartOptions = {
     title: `Messages Per week for ${this.groupName}`,
     type: 'LineChart',
     columnNames: ['Week', 'Messages'],
@@ -29,20 +36,37 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit(): void {
+
     this.messageApiService.getThreads()
       .subscribe(res => this.groupList = res);
-
     this.updateGraph();
   }
 
   updateGraph() {
-    this.chart.data = [];
-    this.messageApiService.getWeeklyCount(this.groupName)
-      .subscribe(res => {
-        res.forEach(weekly => {
-          this.chart.data.push([`${weekly.week.toString()}-${weekly.year.toString().slice(-2)}`, parseInt(weekly.count, 10)]);
-        });
-        // console.log(this.chart.data);
-      });
+    // this.chartOptions.data = [['23-03', 123], ['23-03', 123], ['23-03', 123]];
+    this.chartOptions.title = 'Messages per date for ' + this.groupName;
+
+    switch (this.rate) {
+      case 'weekly': {
+        this.messageApiService.getWeeklyCount(this.groupName)
+          .subscribe(res => this.formatGraphData(res));
+        break;
+      }
+      case 'monthly': {
+        this.messageApiService.getMonthlyCount(this.groupName)
+          .subscribe(res => this.formatGraphData(res));
+        break;
+      }
+    }
+
+  }
+
+  formatGraphData(graphData: MessageRate[]) {
+    const newData = [];
+    console.log(graphData);
+    graphData.forEach(rateDate => {
+      newData.push([moment(rateDate.date).format('DD-MM-YY'), parseInt(rateDate.count, 10)]);
+    });
+    this.chartOptions.data = newData;
   }
 }

@@ -10,7 +10,11 @@ export class MessagesApiService {
   constructor(private http: HttpClient) { }
 
   getWeeklyCount(groupName: string ) {
-    return this.http.get<WeeklyCount[]>(`${environment.base_api_url}/messages/weekly/${groupName}`);
+    return this.http.get<MessageRate[]>(`${environment.base_api_url}/messages/weekly/${groupName}`);
+  }
+
+  getMonthlyCount(groupName: string) {
+    return this.http.get<MessageRate[]>(`${environment.base_api_url}/messages/monthly/${groupName}`);
   }
 
   getThreads() {
@@ -21,8 +25,7 @@ export interface ThreadName {
   name: string;
 }
 
-export interface WeeklyCount {
-  year: number;
-  week: number;
+export interface MessageRate {
+  date: string;
   count: string;
 }
