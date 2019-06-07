@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { WordtreeComponent } from './wordtree/wordtree.component';
 import { MessageLengthComponent } from './message-length/message-length.component';
+import { SentimentComponent } from './sentiment/sentiment.component';
 
 registerLocaleData(en);
 
@@ -24,7 +25,8 @@ registerLocaleData(en);
     SidenavComponent,
     MessageRateComponent,
     WordtreeComponent,
-    MessageLengthComponent
+    MessageLengthComponent,
+    SentimentComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,8 @@ export enum GraphType {
   Contribution,
   MessageRate,
   WordTree,
-  MessageLength
+  MessageLength,
+  Sentiment
 }
 
 export namespace GraphType {

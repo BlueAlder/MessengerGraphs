@@ -35,4 +35,5 @@
   <app-message-rate [groupName]="threadName" *ngIf="graphType == GraphTypes.MessageRate"></app-message-rate>
   <app-wordtree [groupName]="threadName" *ngIf="graphType == GraphTypes.WordTree"></app-wordtree>
   <app-message-length [groupName]="threadName" *ngIf="graphType == GraphTypes.MessageLength"></app-message-length>
+  <app-sentiment *ngIf="graphType == GraphTypes.Sentiment"></app-sentiment>
 </div>
