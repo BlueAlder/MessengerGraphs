@@ -1,5 +1,5 @@
 steps:
-   - id: "unshallow"
+  - id: "unshallow"
     name: gcr.io/cloud-builders/git
     entrypoint: "/bin/bash"
     args:
