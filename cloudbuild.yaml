@@ -2,8 +2,7 @@ steps:
   - id: "unshallow"
     name: gcr.io/cloud-builders/git
     entrypoint: "/bin/bash"
-    args:
-      - ["-c", "git", "config", "--global", "http.postBuffer", "1048576000", "&&", "git", "fetch", "--unshallow"]
+    args: ["-c", "git", "config", "--global", "http.postBuffer", "1048576000", "&&", "git", "fetch", "--unshallow"]
 
     env:
       - "GIT_CURL_VERBOSE=true"
